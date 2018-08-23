@@ -1,4 +1,8 @@
 using System;
+using ToDoListMobileApp.Interfaces;
+using ToDoListMobileApp.Repositories;
+using ToDoListMobileApp.Repositories.SQLite;
+using ToDoListMobileApp.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -7,11 +11,14 @@ namespace ToDoListMobileApp
 {
 	public partial class App : Application
 	{
+        public static IItemRepository Repository { get; set; }
+         
 		public App ()
 		{
 			InitializeComponent();
 
-			MainPage = new MainPage();
+            Repository = new ItemSQLiteRepository();
+            MainPage = new NavigationPage(new ListItemsPage());
 		}
 
 		protected override void OnStart ()
