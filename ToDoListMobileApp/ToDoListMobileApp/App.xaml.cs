@@ -1,6 +1,8 @@
 using System;
 using ToDoListMobileApp.Interfaces;
 using ToDoListMobileApp.Repositories;
+using ToDoListMobileApp.Repositories.Azure;
+using ToDoListMobileApp.Repositories.Ram;
 using ToDoListMobileApp.Repositories.SQLite;
 using ToDoListMobileApp.Views;
 using Xamarin.Forms;

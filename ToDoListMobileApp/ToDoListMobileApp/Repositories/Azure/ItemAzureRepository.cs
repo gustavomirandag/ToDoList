@@ -7,39 +7,31 @@ using ToDoListMobileApp.Models;
 using System.Linq;
 using Xamarin.Forms;
 using System.IO;
-using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
-namespace ToDoListMobileApp.Repositories.SQLite
+namespace ToDoListMobileApp.Repositories.Azure
 {
-    public class ItemSQLiteRepository : IItemRepository
+    public class ItemAzureRepository : IItemRepository
     {
-        private ToDoListSQLiteContext _db;
+        private ToDoListAzureContext _db;
         public ObservableCollection<Item> Items { get; set; }
 
-        public ItemSQLiteRepository()
+        public ItemAzureRepository()
         {
-            string dbPath = String.Empty;
+            string dbConnectionString = "COLOQUE AQUI SUA STRING DE CONEXÃO";
 
-            switch (Device.RuntimePlatform)
-            {
-                case Device.UWP:
-                    dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "database.sqlite");
-                    break;
-                case Device.iOS:
-                    dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "..", "Library", "data", "database.sqlite");
-                    break;
-                case Device.Android:
-                    dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), "database.sqlite");
-                    break;
-            }
-
-            _db = new ToDoListSQLiteContext(dbPath);
+            _db = new ToDoListAzureContext(dbConnectionString);
 
             //#### Fill The ObservableCollection ####
             Items = new ObservableCollection<Item>();
-            if (_db.Items != null && _db.Items.Count() > 0)
+            try
+            {
                 foreach (var item in _db.Items)
                     Items.Add(item);
+            }
+            catch
+            {
+            }
             //#######################################
         }
 
@@ -63,7 +55,7 @@ namespace ToDoListMobileApp.Repositories.SQLite
             //##### Update the LocalDatabase #####
             var entry = _db.Entry(item);
             _db.Items.Attach(item);
-            entry.State = EntityState.Modified;
+            entry.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             _db.SaveChanges();
             //####################################
         }

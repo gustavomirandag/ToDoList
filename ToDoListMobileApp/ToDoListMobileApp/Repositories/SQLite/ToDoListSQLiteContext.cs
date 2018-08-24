@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using System.Text;
 using ToDoListMobileApp.Models;
 
-namespace ToDoListMobileApp.Contexts
+namespace ToDoListMobileApp.Repositories.SQLite
 {
-    public class ToDoListContext : DbContext
+    public class ToDoListSQLiteContext : DbContext
     {
         private string _dbPath;
 
-        public ToDoListContext(string dbPath)
+        public ToDoListSQLiteContext(string dbPath)
         {
             _dbPath = dbPath;
             // Create database if not there
@@ -23,5 +23,6 @@ namespace ToDoListMobileApp.Contexts
         }
 
         public DbSet<Item> Items { get; set; }
+
     }
 }
