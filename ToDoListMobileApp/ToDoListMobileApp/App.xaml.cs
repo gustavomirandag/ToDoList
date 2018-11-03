@@ -1,25 +1,26 @@
 using System;
-using ToDoListMobileApp.Interfaces;
-using ToDoListMobileApp.Repositories;
-using ToDoListMobileApp.Repositories.Azure;
-using ToDoListMobileApp.Repositories.Ram;
-using ToDoListMobileApp.Repositories.SQLite;
+using DomainModel.Interfaces;
+using Data.Repositories;
+using Data.Repositories.Azure;
+using Data.Repositories.Ram;
+using Data.Repositories.SQLite;
 using ToDoListMobileApp.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using DomainService;
 
 [assembly: XamlCompilation (XamlCompilationOptions.Compile)]
 namespace ToDoListMobileApp
 {
 	public partial class App : Application
 	{
-        public static IItemRepository Repository { get; set; }
+        public static ItemService Service { get; set; }
          
 		public App ()
 		{
 			InitializeComponent();
 
-            Repository = new ItemSQLiteRepository();
+            Service = new ItemService(new ItemSQLiteRepository(Device.RuntimePlatform));
             MainPage = new NavigationPage(new ListItemsPage());
 		}
 

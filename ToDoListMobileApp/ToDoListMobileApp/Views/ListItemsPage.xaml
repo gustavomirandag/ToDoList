@@ -4,7 +4,7 @@
              x:Class="ToDoListMobileApp.Views.ListItemsPage">
     <ContentPage.Content>
         <StackLayout>
-            <ListView x:Name="ListViewItems" ItemsSource="{Binding Items}" HasUnevenRows="True" VerticalOptions="FillAndExpand">
+            <ListView x:Name="ListViewItems" HasUnevenRows="True" VerticalOptions="FillAndExpand">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -16,7 +16,9 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Button x:Name="ButtonAddItem" Text="Add Item" Clicked="ButtonAddItem_Clicked"/>
+            <AbsoluteLayout>
+                <Button AbsoluteLayout.LayoutBounds="1,1,80,80" AbsoluteLayout.LayoutFlags="PositionProportional" x:Name="ButtonAddItem" Text="+" FontAttributes="Bold" FontSize="Large" BorderWidth="2" BorderColor="Black" WidthRequest="80" HeightRequest="80" BorderRadius="80" BackgroundColor="Aqua" Clicked="ButtonAddItem_Clicked" />
+            </AbsoluteLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -1,10 +1,9 @@
-﻿using System;
+﻿using DomainModel.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ToDoListMobileApp.Interfaces;
-using ToDoListMobileApp.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -32,7 +31,7 @@ namespace ToDoListMobileApp.Views
         {
             _item.Title = EntryTitle.Text;
             _item.Description = EntryDescription.Text;
-            App.Repository.Update(_item);
+            App.Service.Update(_item);
             Navigation.PopModalAsync();
         }
     }

@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AmazingNotes.Views.AddItemPage">
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="UWP" Value="40,200,40,40"/>
+            <On Platform="Android" Value="20,20,20,20"/>
+        </OnPlatform>
+    </ContentPage.Padding>
+    <ContentPage.Content>
+        <StackLayout Padding="10" Spacing="10">
+            <Entry x:Name="EntryTitle" Placeholder="Type a task title" HorizontalOptions="FillAndExpand"/>
+            <Entry x:Name="EntryDescription" Placeholder="Type a task description" HorizontalOptions="FillAndExpand"/>
+            <StackLayout x:Name="StackLayoutReminder" Padding="30">
+                <BoxView Color="Black" HorizontalOptions="FillAndExpand" HeightRequest="2"/>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Remind:" VerticalOptions="Center"/>
+                    <Switch x:Name="SwitchReminder" Toggled="SwitchReminder_Toggled" VerticalOptions="Center"/>
+                </StackLayout>
+                <DatePicker x:Name="DatePickerReminder" IsEnabled="False"/>
+                <TimePicker x:Name="TimePickerReminder" IsEnabled="False"/>
+                <BoxView Color="Black" HorizontalOptions="FillAndExpand" HeightRequest="2"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" Spacing="30">
+                <Button x:Name="ButtonAdd" Text="Add" Clicked="ButtonAdd_Clicked" HorizontalOptions="FillAndExpand"/>
+                <Button x:Name="ButtonCancel" Text="Cancel" Clicked="ButtonCancel_Clicked" HorizontalOptions="FillAndExpand"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

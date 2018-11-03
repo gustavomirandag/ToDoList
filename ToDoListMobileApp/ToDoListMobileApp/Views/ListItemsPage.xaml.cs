@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ToDoListMobileApp.Interfaces;
-using ToDoListMobileApp.Models;
-using ToDoListMobileApp.Repositories;
+using DomainModel.Interfaces;
+using DomainModel.Entities;
+using Data.Repositories;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -17,7 +17,7 @@ namespace ToDoListMobileApp.Views
         public ListItemsPage()
         {
             InitializeComponent();
-            BindingContext = App.Repository;
+            ListViewItems.ItemsSource = App.Service.GetReferenceToObservableCollection();
             ListViewItems.ItemTapped += ListViewItems_ItemTapped;
         }
 
@@ -28,7 +28,7 @@ namespace ToDoListMobileApp.Views
 
         private void ButtonAddItem_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushModalAsync(new AddItemPage());
+            Navigation.PushModalAsync(new AddItemPage(), true);
         }
     }
 }
